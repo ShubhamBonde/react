@@ -1,5 +1,8 @@
+import { StrictMode } from "react";
 import { render } from "react-dom";
 import SearchParams from "./SearchParams";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Details from "./Details";
 // global React and ReactDOM
 
 // const App = () => {
@@ -26,12 +29,22 @@ import SearchParams from "./SearchParams";
 // };
 
 const App = () => {
-  
+  // <StrictMode> strictMode gives you additional warnings when using legacy and soon to be depricated
+  // code.
   return (
-    <div id="my-app">
-      <h1>Adopt Me!</h1>
-      <SearchParams/>
-    </div>
+    <StrictMode>
+      <BrowserRouter>
+        <header>
+          <Link to="/" className="header">
+            Adopt Me!
+          </Link>
+        </header>
+        <Routes>
+          <Route path="/" element={<SearchParams />} />
+          <Route path="/details/:id" element={<Details />} />
+        </Routes>
+      </BrowserRouter>
+    </StrictMode>
   );
 };
 // render(React.createElement(App), document.getElementById("root"));
